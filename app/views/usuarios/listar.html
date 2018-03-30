@@ -1,0 +1,41 @@
+<h1>Listagem de Usuarios</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Perfil</th>
+            <th>Habilitado</th>
+            <th class="text-right">
+                <a class="btn btn-success" 
+                    [routerLink]="['/usuario-cadastrar']">
+                    Cadastrar
+                </a>
+            </th>
+        </tr>
+        <tr *ngFor="let usuario of usuarios; #id=index">
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.perfil }}</td>
+            <td>{{ usuario.habilitado }}</td>
+            <td>
+							<a class="btn btn-info" 
+        			    [routerLink]="['/usuario-editar/'+id]">
+        			    Editar
+        			</a>
+              <button type="button" class="btn btn-danger" 
+                  data-toggle="modal" data-target="#modalExcluir"
+                  (click)="excluir(id)">
+                  Excluir
+              </button>
+            </td>
+        </tr>
+    </table>
+    <modal-util 
+        [id]="'modalExcluir'" 
+        [titulo]="'Excluir Usuario'"
+        [descricao]="'Deseja realmente excluir o usuario selecionado?'"
+        (onConfirm)="onExcluir($event)">
+    </modal-util>
+</div>
